@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.ShopMapper">
+    <!--后端商品信息-->
+    <select id="SelectShop" parameterType="String" resultType="Shopmessage">
+        select * from shop
+    </select>
+    <!--后端添加商品-->
+    <insert id="AddShop" parameterType="Shopmessage">
+        INSERT INTO shop(shopname,title,type1,type2,shoper,price,text,stock,hot,photo)
+        values(#{shopname},#{title},#{type1},#{type2},#{shoper},#{price},#{text},#{stock},#{hot},#{photo})
+    </insert>
+    <!--后端单条商品查询-->
+    <select id="SelectOneShop" parameterType="_int" resultType="Shopmessage">
+        select * from shop where sid=#{sid}
+    </select>
+    <!--后端单条商品修改-->
+    <update id="UpdateShop" parameterType="Shopmessage">
+        update shop set
+        <trim suffixOverrides=",">
+            <if test="shopname!=null and shopname!=''">
+                shopname=#{shopname},
+            </if>
+            <if test="title!=null and title!=''">
+                title=#{title},
+            </if>
+            <if test="type1!=null and type1!=''">
+                type1=#{type1},
+            </if>
+            <if test="type2!=null and type2!=''">
+                type2=#{type2},
+            </if>
+            <if test="shoper!=null and shoper!=''">
+                shoper=#{shoper},
+            </if>
+            <if test="price!=null and price!=''">
+                price=#{price},
+            </if>
+            <if test="text!=null and text!=''">
+                text=#{text},
+            </if>
+            <if test="stock!=null and stock!=''">
+                stock=#{stock},
+            </if>
+            <if test="hot!=null and hot!=''">
+                hot=#{hot},
+            </if>
+            <if test="photo!=null and photo!=''">
+                photo=#{photo},
+            </if>
+        </trim>
+        where sid=#{sid}
+    </update>
+    <!--后端单条商品删除-->
+    <delete id="DeleteShop" parameterType="Shopmessage">
+        delete from shop where sid=#{sid}
+    </delete>
+    <!--查找商品数量-->
+    <select id="SelectStock" parameterType="_int" resultType="_int">
+        select stock from shop where sid=#{sid}
+    </select>
+    <!--查找商品热度-->
+    <select id="SelectHot" parameterType="_int" resultType="_int">
+        select hot from shop where sid=#{sid}
+    </select>
+    <!--商品详情页推荐商品-->
+    <select id="SelectOneShopDown" parameterType="Shopmessage" resultType="Shopmessage">
+        select * from shop where sid !=#{sid} and ( type1=#{type1} or type2=#{type2} )  ORDER BY Rand() DESC LIMIT 5
+    </select>
+</mapper>

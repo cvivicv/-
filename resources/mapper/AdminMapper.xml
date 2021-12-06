@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.AdminMapper">
+    <!--后端用户信息-->
+    <select id="SelectUser" resultType="java.util.Map">
+        select * from loginuser
+    </select>
+    <!--后端添加用户-->
+    <insert id="AddUser" parameterType="Usermessage">
+        INSERT INTO loginuser(userid,username,password,email,cometime,money) values(#{userid},#{username},#{password},#{email},#{cometime},#{money});
+    </insert>
+    <!--后端单条查询-->
+    <select id="SelectOneUser" parameterType="_int" resultType="Usermessage">
+        select * from loginuser where userid=#{userid}
+    </select>
+    <!--后端单条修改-->
+    <update id="UpdateUser" parameterType="Usermessage">
+        update loginuser
+        set username=#{username},password=#{password},email=#{email},money=#{money}
+        where userid=#{userid}
+    </update>
+    <!--后端单条删除-->
+    <delete id="DeleteUser" parameterType="Usermessage">
+        delete from loginuser where userid=#{userid}
+    </delete>
+</mapper>

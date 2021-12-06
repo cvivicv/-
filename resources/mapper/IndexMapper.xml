@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.IndexMapper">
+    <!--查询最为热门的6条商品-->
+    <select id="SelectHotShop" parameterType="String" resultType="Shopmessage">
+        select * from shop ORDER BY hot DESC LIMIT 6
+    </select>
+    <!--查询最为新的6条商品，与最为热门的不重复-->
+    <select id="SelectNewShop" parameterType="String" resultType="Shopmessage">
+        select * from shop where sid not in
+        (select this_table.sid from(select * from shop ORDER BY hot DESC LIMIT 6) as this_table)
+         ORDER BY sid DESC LIMIT 6
+    </select>
+    <!--主页商品单，完全随机18条商品，与热门与最新不重复-->
+    <select id="SelectRandShop" parameterType="String" resultType="Shopmessage">
+        select * from shop
+--      判断最热
+        where sid not in(select hot_table.sid from(select * from shop ORDER BY hot DESC LIMIT 6) as hot_table)
+--      判断最新
+        and sid not in (select new_table.sid from(select * from shop where sid not in
+        (select this_table.sid from(select * from shop ORDER BY hot DESC LIMIT 6) as this_table)
+        ORDER BY sid DESC LIMIT 6)as new_table)
+        ORDER BY Rand() DESC LIMIT 18
+    </select>
+    <!--搜索框进行商品查询热门降序操作-->
+    <select id="SelectSearch" parameterType="String" resultType="Shopmessage">
+         select * from shop where
+         shopname like concat('%',#{event},'%')
+         or shoper like concat('%',#{event},'%')
+         or type1 like concat('%',#{event},'%')
+         or type2 like concat('%',#{event},'%')
+         or text like concat('%',#{event},'%')
+         ORDER BY hot DESC
+    </select>
+    <!--搜索框进行商品查询最新降序操作-->
+    <select id="SelectNewSearch" parameterType="String" resultType="Shopmessage">
+         select * from shop where
+         shopname like concat('%',#{event},'%')
+         or shoper like concat('%',#{event},'%')
+         or type1 like concat('%',#{event},'%')
+         or type2 like concat('%',#{event},'%')
+         or text like concat('%',#{event},'%')
+         ORDER BY sid DESC
+    </select>
+    <!--搜索框进行商品查询金额升序操作-->
+    <select id="MoneyUpSearch" parameterType="String" resultType="Shopmessage">
+         select * from shop where
+         shopname like concat('%',#{event},'%')
+         or shoper like concat('%',#{event},'%')
+         or type1 like concat('%',#{event},'%')
+         or type2 like concat('%',#{event},'%')
+         or text like concat('%',#{event},'%')
+         ORDER BY price ASC
+    </select>
+    <!--搜索框进行商品查询金额降序操作-->
+    <select id="MoneyDownSearch" parameterType="String" resultType="Shopmessage">
+         select * from shop where
+         shopname like concat('%',#{event},'%')
+         or shoper like concat('%',#{event},'%')
+         or type1 like concat('%',#{event},'%')
+         or type2 like concat('%',#{event},'%')
+         or text like concat('%',#{event},'%')
+         ORDER BY price DESC
+    </select>
+</mapper>

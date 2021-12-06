@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.PurchaseMapper">
+    <!--购物车添加订单-->
+    <insert id="AddPurchase" parameterType="Purchasemessage" >
+        INSERT INTO purchase(userid,username,sid,shopname,shoper,price,sell,photo,receiving,creation_time,truename,address,phone)
+        values(#{userid},#{username},#{sid},#{shopname},#{shoper},#{price},#{sell},#{photo},#{receiving},#{creation_time},#{truename},#{address},#{phone})
+    </insert>
+
+    <!--用户订单查询之未配送-->
+    <select id="SelectNotDelivered" parameterType="_int" resultType="Purchasemessage">
+        select * from purchase where receiving=0 and userid=#{userid}
+    </select>
+    <!--用户订单查询之配送中，已送达-->
+    <select id="SelectDelivering" parameterType="_int" resultType="Purchasemessage">
+        select * from purchase where receiving in (1,2) and userid=#{userid}
+    </select>
+    <!--用户订单查询之已接收-->
+    <select id="SelectDelivered" parameterType="_int" resultType="Purchasemessage">
+        select * from purchase where receiving in (3,4) and userid=#{userid}
+    </select>
+
+    <!--商户订单查询之未配送-->
+    <select id="ShoperNotDelivered" parameterType="String" resultType="Purchasemessage">
+        select * from purchase where receiving=0 and shoper=#{shopername}
+    </select>
+    <!--商户订单查询之配送中，已送达-->
+    <select id="ShoperDelivering" parameterType="String" resultType="Purchasemessage">
+        select * from purchase where receiving in (1,2) and shoper=#{shopername}
+    </select>
+    <!--商户订单查询之已接收-->
+    <select id="ShoperDelivered" parameterType="String" resultType="Purchasemessage">
+        select * from purchase where receiving in (3,4) and shoper=#{shopername}
+    </select>
+
+    <!--商户订单配送中修改-->
+    <update id="ShoperPurchaseDelivering" parameterType="_int">
+        update purchase set receiving=1 where purid=#{purid}
+    </update>
+
+
+</mapper>
