@@ -118,44 +118,44 @@
             第${pageInfo.pageNum}页，共${pageInfo.pages}页，共${pageInfo.total}条记录
         </div>
         <div class="col-md-6 offset-md-4" style="text-align: right">
-            <nav aria-label="Page navigation example">
+             <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-sm">
-                    <li class="page-item"><a class="page-link" href="ShopDoing.html?page=1">首页</a></li>
+                    <li class="page-item"><a class="page-link" href="UserDoing.html?page=1">首页</a></li>
                     <c:if test="${pageInfo.hasPreviousPage}">
-                        <li class="page-item"><a class="page-link" href="ShopDoing.html?page=${pageInfo.pageNum-1}">上一页</a></li>
+                        <li class="page-item"><a class="page-link" href="UserDoing.html?page=${pageInfo.pageNum-1}">上一页</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum>2&&pageInfo.pages>3}">
-                        <li class="page-item"><a class="page-link" href="ShopDoing.html?page=1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="UserDoing.html?page=1">1</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum>3}">
                         <li class="page-item"><a class="page-link" disabled>...</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum==pageInfo.pages&&pageInfo.pages>2}">
-                        <li class="page-item"><a class="page-link" href="ShopDoing.html?page=${pageInfo.pageNum-2}">${pageInfo.pageNum-2}</a></li>
+                        <li class="page-item"><a class="page-link" href="UserDoing.html?page=${pageInfo.pageNum-2}">${pageInfo.pageNum-2}</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum>1}">
-                        <li class="page-item"><a class="page-link" href="ShopDoing.html?page=${pageInfo.pageNum-1}">${pageInfo.pageNum-1}</a></li>
+                        <li class="page-item"><a class="page-link" href="UserDoing.html?page=${pageInfo.pageNum-1}">${pageInfo.pageNum-1}</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum!=null}">
                         <li class="page-item active"><a class="page-link" href="#">${pageInfo.pageNum}</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum+1<=pageInfo.pages}">
-                        <li class="page-item"><a class="page-link" href="ShopDoing.html?page=${pageInfo.pageNum+1}">${pageInfo.pageNum+1}</a></li>
+                        <li class="page-item"><a class="page-link" href="UserDoing.html?page=${pageInfo.pageNum+1}">${pageInfo.pageNum+1}</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum==1&&pageInfo.pages>2}">
-                        <li class="page-item"><a class="page-link" href="ShopDoing.html?page=${pageInfo.pageNum+2}">${pageInfo.pageNum+2}</a></li>
+                        <li class="page-item"><a class="page-link" href="UserDoing.html?page=${pageInfo.pageNum+2}">${pageInfo.pageNum+2}</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum+2<pageInfo.pages}">
                         <li class="page-item"><a class="page-link" disabled>...</a></li>
                     </c:if>
                     <c:if test="${pageInfo.pageNum+1<pageInfo.pages&&pageInfo.pages>3}">
-                        <li class="page-item"><a class="page-link" href="ShopDoing.html?page=${pageInfo.pages}">${pageInfo.pages}</a></li>
+                        <li class="page-item"><a class="page-link" href="UserDoing.html?page=${pageInfo.pages}">${pageInfo.pages}</a></li>
                     </c:if>
                     <c:if test="${pageInfo.hasNextPage}">
                         <li class="page-item"><a class="page-link"
-                                                 href="ShopDoing.html?page=${pageInfo.pageNum+1}">下一页</a></li>
+                                                 href="UserDoing.html?page=${pageInfo.pageNum+1}">下一页</a></li>
                     </c:if>
-                    <li class="page-item"><a class="page-link" href="ShopDoing.html?page=${pageInfo.pages}">末页</a>
+                    <li class="page-item"><a class="page-link" href="UserDoing.html?page=${pageInfo.pages}">末页</a>
                     </li>
                 </ul>
             </nav>
